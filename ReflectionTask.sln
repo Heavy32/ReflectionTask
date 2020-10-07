@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionTask", "ReflectionTask\ReflectionTask.csproj", "{4EBF176E-A00E-4EFF-9B2E-4A3C641969BF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionTest", "..\..\..\source\repos\ReflectionTest\ReflectionTest\ReflectionTest.csproj", "{D20E41D9-B043-4ED1-A564-F6F987AB12F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionTestClasses", "ReflectionTestClasses\ReflectionTestClasses.csproj", "{EE4C3554-A0DA-4C55-B5D8-B74DCB8CB20F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4EBF176E-A00E-4EFF-9B2E-4A3C641969BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EBF176E-A00E-4EFF-9B2E-4A3C641969BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EBF176E-A00E-4EFF-9B2E-4A3C641969BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D20E41D9-B043-4ED1-A564-F6F987AB12F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D20E41D9-B043-4ED1-A564-F6F987AB12F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D20E41D9-B043-4ED1-A564-F6F987AB12F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D20E41D9-B043-4ED1-A564-F6F987AB12F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE4C3554-A0DA-4C55-B5D8-B74DCB8CB20F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE4C3554-A0DA-4C55-B5D8-B74DCB8CB20F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE4C3554-A0DA-4C55-B5D8-B74DCB8CB20F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE4C3554-A0DA-4C55-B5D8-B74DCB8CB20F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

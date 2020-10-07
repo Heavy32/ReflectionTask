@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ClassWithOneProperty.cs" />
+    <Compile Remove="TestClassWithPrivateFields.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="ClassWithOneProperty.cs" />
+    <None Include="TestClassWithPrivateFields.cs" />
+  </ItemGroup>
+
+</Project>
