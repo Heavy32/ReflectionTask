@@ -32,7 +32,6 @@ namespace ReflectionTask
             if (string.IsNullOrEmpty(className))
                 throw new ArgumentNullException("Class name is null");
 
-
             if (!typeCache.TryGetValue(className, out Type type))
             {
                 try
