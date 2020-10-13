@@ -32,22 +32,8 @@ namespace ReflectionTask
             if (string.IsNullOrEmpty(className))
                 throw new ArgumentNullException("Class name is null");
 
-            if (!typeCache.TryGetValue(className, out Type type))
-            {
-                try
-                {
-                    type = assembly.DefinedTypes
-                        .Where(x => x.Name == className)
-                        .FirstOrDefault()
-                        .AsType();
-                }
-                catch (NullReferenceException)
-                {
-                    throw new Exception($"Class with name {className} could not be found in assembly {assembly.ManifestModule.Name}");
-                }
-
-                typeCache.Set(className, type);
-            }
+            TypeFromCache typeFromCache = new TypeFromCache(typeCache);
+            var type = new GetTypeFromAssembly(typeFromCache, assembly).GetTypeByName(className);
 
             if(!InputArgumentsMatchCtor(type, constructorArgs))
                 throw new MissingMethodException($"Constructor of type {className} with arguments passed cannot be found");
