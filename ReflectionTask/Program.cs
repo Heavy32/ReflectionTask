@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Caching.Memory;
+using System.Collections.Generic;
 
 namespace ReflectionTask
 {
@@ -6,16 +7,17 @@ namespace ReflectionTask
     {
         static void Main(string[] args)
         {
-            ClassFactory factory = new ClassFactory("ReflectionTest.dll");
+            ClassFactory factory = new ClassFactory(
+                "ReflectionTestClasses.dll",
+                new MemoryCache(new MemoryCacheOptions()),
+                new MemoryCache(new MemoryCacheOptions()));
 
             List<object> classesCreated = new List<object>
             {
-                factory.Create("InnerClass"),
-                factory.Create("ClassWithOneProperty"),
                 factory.Create("ClassWithThreeConstructor"),
-                factory.Create("ClassWithTwoConstructor", 2),
+                factory.Create("ClassWithTwoConstructor"),
                 factory.Create("OuterClass"),
-                factory.Create("TestClassWithPrivateFields"),
+                factory.Create("InnerClass"),
             };
 
             ClassInfoShower shower = new ClassInfoShower(classesCreated);

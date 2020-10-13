@@ -7,18 +7,24 @@ namespace ReflectionTask
 {
     public class ClassFactory
     {
-        private readonly MemoryCache typeCache;
-        private readonly MemoryCache assemblyCache;
-        private readonly string assemblyPath;
+        private readonly IMemoryCache typeCache;
+        private readonly Assembly assembly;
 
-        public ClassFactory(string assemblyPath)
+        public ClassFactory(
+            string assemblyPath,
+            IMemoryCache typeCache,
+            IMemoryCache assemblyCache)
         {
             if (string.IsNullOrEmpty(assemblyPath))
                 throw new ArgumentNullException("Assembly's path is null");
 
-            this.assemblyPath = assemblyPath;
-            typeCache = new MemoryCache(new MemoryCacheOptions());
-            assemblyCache = new MemoryCache(new MemoryCacheOptions());
+            this.typeCache = typeCache;
+
+            if (!assemblyCache.TryGetValue(assemblyPath, out assembly))
+            {
+                assembly = Assembly.LoadFrom(assemblyPath);
+                assemblyCache.Set(assemblyPath, assembly);
+            }
         }
 
         public object Create(string className, params object[] constructorArgs)
@@ -26,11 +32,6 @@ namespace ReflectionTask
             if (string.IsNullOrEmpty(className))
                 throw new ArgumentNullException("Class name is null");
 
-            if (!assemblyCache.TryGetValue(assemblyPath, out Assembly assembly))
-            {
-                assembly = Assembly.LoadFrom(assemblyPath);
-                assemblyCache.Set(assemblyPath, assembly);
-            }
 
             if (!typeCache.TryGetValue(className, out Type type))
             {
@@ -49,13 +50,13 @@ namespace ReflectionTask
                 typeCache.Set(className, type);
             }
 
-            if(!IsInputArgumentsMatchWithClassContstructor(type, constructorArgs))
+            if(!InputArgumentsMatchCtor(type, constructorArgs))
                 throw new MissingMethodException($"Constructor of type {className} with arguments passed cannot be found");
 
             return Activator.CreateInstance(type, constructorArgs);
         }
 
-        private bool IsInputArgumentsMatchWithClassContstructor(Type type, params object[] constructorArgs)
+        private bool InputArgumentsMatchCtor(Type type, params object[] constructorArgs)
         {
             var constructors = type.GetConstructors();
 
